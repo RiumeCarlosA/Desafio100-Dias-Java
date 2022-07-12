@@ -3,10 +3,14 @@ import java.util.Scanner;
 public class Desafio_6 {
     static void Tabuada(int inicio, int fim, int valor){
         int resultado = 0;
-        for(int i = inicio; i <= fim; i++){
-            resultado = i * valor;
-            System.out.printf("%d x %d = %d\n", valor, i, resultado);
-        }
+        if(inicio < fim){
+            for(int i = inicio; i <= fim; i++){
+                resultado = i * valor;
+                System.out.printf("%d x %d = %d\n", valor, i, resultado);
+            }
+        }else{
+            System.out.println("escreva um valor de fim maior que o de inicio");
+        } 
     }
     public static void main(String args[]){
         int resultado, inicio, fim, tabuada;
