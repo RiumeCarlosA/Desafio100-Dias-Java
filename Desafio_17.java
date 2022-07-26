@@ -1,18 +1,20 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 class Jogo{
 	int[] n = new int [9];
 	int[][] tabuleiro = new int[9][4];
+	int tentativas = 0;
 	
 	void instanciar(){
 		this.tabuleiro[n[0]][0] = 100;
@@ -101,9 +103,52 @@ public class Desafio_17 {
 		
 		JFrame frame = new JFrame();
 		frame.setTitle("Desafio Java");
-		frame.setSize(400,350);
+		frame.setSize(375,350);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		JLabel lb1 = new JLabel();
+		lb1.setText("tentativas: "+ jogo.tentativas);
+		lb1.setBounds(40, 15, 100, 20);
+		frame.add(lb1);
+		
+		JLabel tempo = new JLabel();
+		tempo.setBounds(230, 15, 150, 20);
+		Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            int i = 0;
+            int j = 0;
+            int y = 0;
+            int k = 0;
+            public void run() {
+                tempo.setText("Tempo: "+ k + j +" : "+ y + i);
+                i++;
+                if(i == 10) {
+                	y++;
+                	i = 0;
+                	if(y == 6) {
+                    	y = 0;
+                    	j++;
+                    	if(j == 10) {
+                    		j = 0;
+                    		k++;
+                    	}
+                    }
+                }
+            }
+        }, 0, 1000);
+        frame.add(tempo);
+		
+		JButton reiniciar = new JButton("Novo jogo");
+		reiniciar.setBounds(100, 230, 150, 30);
+		reiniciar.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				tela();
+			}
+			
+		});
+		frame.add(reiniciar);
 		
 		JButton bt1 = new JButton("1");
 		bt1.setBounds(jogo.tabuleiro[jogo.n[0]][0],jogo.tabuleiro[jogo.n[0]][1],jogo.tabuleiro[jogo.n[0]][2],jogo.tabuleiro[jogo.n[0]][3] );
@@ -115,6 +160,8 @@ public class Desafio_17 {
 					jogo.n[8] = jogo.n[0];
 					jogo.n[0] = i;
 					bt1.setBounds(jogo.tabuleiro[jogo.n[0]][0],jogo.tabuleiro[jogo.n[0]][1],jogo.tabuleiro[jogo.n[0]][2],jogo.tabuleiro[jogo.n[0]][3] );
+					jogo.tentativas++;
+					lb1.setText("tentativas: "+ jogo.tentativas);
 				}
 				jogo.verificarVencedor();
 			}
@@ -132,6 +179,8 @@ public class Desafio_17 {
 					jogo.n[8] = jogo.n[1];
 					jogo.n[1] = i;
 					bt2.setBounds(jogo.tabuleiro[jogo.n[1]][0],jogo.tabuleiro[jogo.n[1]][1],jogo.tabuleiro[jogo.n[1]][2],jogo.tabuleiro[jogo.n[1]][3] );	
+					jogo.tentativas++;
+					lb1.setText("tentativas: "+ jogo.tentativas);
 				}
 				jogo.verificarVencedor();
 			}
@@ -148,7 +197,9 @@ public class Desafio_17 {
 					int i = jogo.n[8];
 					jogo.n[8] = jogo.n[2];
 					jogo.n[2] = i;
-					bt3.setBounds(jogo.tabuleiro[jogo.n[2]][0],jogo.tabuleiro[jogo.n[2]][1],jogo.tabuleiro[jogo.n[2]][2],jogo.tabuleiro[jogo.n[2]][3] );				
+					bt3.setBounds(jogo.tabuleiro[jogo.n[2]][0],jogo.tabuleiro[jogo.n[2]][1],jogo.tabuleiro[jogo.n[2]][2],jogo.tabuleiro[jogo.n[2]][3] );	
+					jogo.tentativas++;
+					lb1.setText("tentativas: "+ jogo.tentativas);
 				}
 				jogo.verificarVencedor();
 			}
@@ -166,6 +217,8 @@ public class Desafio_17 {
 					jogo.n[8] = jogo.n[3];
 					jogo.n[3] = i;
 					bt4.setBounds(jogo.tabuleiro[jogo.n[3]][0],jogo.tabuleiro[jogo.n[3]][1],jogo.tabuleiro[jogo.n[3]][2],jogo.tabuleiro[jogo.n[3]][3] );
+					jogo.tentativas++;
+					lb1.setText("tentativas: "+ jogo.tentativas);
 				}
 				jogo.verificarVencedor();
 			}
@@ -183,6 +236,8 @@ public class Desafio_17 {
 					jogo.n[8] = jogo.n[4];
 					jogo.n[4] = i;
 					bt5.setBounds(jogo.tabuleiro[jogo.n[4]][0],jogo.tabuleiro[jogo.n[4]][1],jogo.tabuleiro[jogo.n[4]][2],jogo.tabuleiro[jogo.n[4]][3] );
+					jogo.tentativas++;
+					lb1.setText("tentativas: "+ jogo.tentativas);
 				}
 				jogo.verificarVencedor();
 			}
@@ -200,6 +255,8 @@ public class Desafio_17 {
 					jogo.n[8] = jogo.n[5];
 					jogo.n[5] = i;
 					bt6.setBounds(jogo.tabuleiro[jogo.n[5]][0],jogo.tabuleiro[jogo.n[5]][1],jogo.tabuleiro[jogo.n[5]][2],jogo.tabuleiro[jogo.n[5]][3] );
+					jogo.tentativas++;
+					lb1.setText("tentativas: "+ jogo.tentativas);
 				}
 				jogo.verificarVencedor();
 			}
@@ -217,6 +274,8 @@ public class Desafio_17 {
 					jogo.n[8] = jogo.n[6];
 					jogo.n[6] = i;
 					bt7.setBounds(jogo.tabuleiro[jogo.n[6]][0],jogo.tabuleiro[jogo.n[6]][1],jogo.tabuleiro[jogo.n[6]][2],jogo.tabuleiro[jogo.n[6]][3] );
+					jogo.tentativas++;
+					lb1.setText("tentativas: "+ jogo.tentativas);
 				}
 				jogo.verificarVencedor();
 			}
@@ -234,6 +293,8 @@ public class Desafio_17 {
 					jogo.n[8] = jogo.n[7];
 					jogo.n[7] = i;
 					bt8.setBounds(jogo.tabuleiro[jogo.n[7]][0],jogo.tabuleiro[jogo.n[7]][1],jogo.tabuleiro[jogo.n[7]][2],jogo.tabuleiro[jogo.n[7]][3] );
+					jogo.tentativas++;
+					lb1.setText("tentativas: "+ jogo.tentativas);
 				}
 				jogo.verificarVencedor();
 			}
@@ -246,6 +307,7 @@ public class Desafio_17 {
 	
 	public static void main(String[] args) {
 		tela();
+		
 	}
 
 }
