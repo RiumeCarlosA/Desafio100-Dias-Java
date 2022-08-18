@@ -23,4 +23,12 @@ public class Crud {
 		stmt.setString(2, nome);
 		stmt.execute();
 	}
+	public void alterarDados(String id, String nome, String email) throws SQLException{
+		String sql = "UPDATE cadastro SET nome = ?, email = ? WHERE id  = ?; ";
+		PreparedStatement stmt = conexao.prepareStatement(sql);
+		stmt.setString(1, nome);
+		stmt.setString(2, email);
+		stmt.setString(3, id);
+		stmt.execute();
+	}
 }

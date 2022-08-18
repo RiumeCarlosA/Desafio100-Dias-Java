@@ -46,7 +46,7 @@ class Janela{
 		
 		JButton bt1 = new JButton("Inserir");
 		bt1.setFont(new Font("Arial",1 , 10));
-		bt1.setBounds(100, 160, 75, 20);
+		bt1.setBounds(30, 160, 75, 20);
 		bt1.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent ev) {
@@ -61,7 +61,7 @@ class Janela{
 		
 		JButton bt2 = new JButton("Excluir");
 		bt2.setFont(new Font("Arial",1 , 10));
-		bt2.setBounds(223, 160, 75, 20);
+		bt2.setBounds(135, 160, 75, 20);
 		bt2.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent ev) {
@@ -73,6 +73,21 @@ class Janela{
 			}
 		});
 		frame.add(bt2);
+		
+		JButton bt3 = new JButton("Alterar");
+		bt3.setFont(new Font("Arial",1 , 10));
+		bt3.setBounds(240, 160, 75, 20);
+		bt3.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				try {
+					crud.alterarDados(tf1.getText(), tf2.getText(), tf3.getText());
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+			}
+		});
+		frame.add(bt3);
 		
 		frame.setVisible(true);
 		
