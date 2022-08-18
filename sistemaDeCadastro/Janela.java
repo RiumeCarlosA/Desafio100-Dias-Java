@@ -106,7 +106,7 @@ class Janela{
 		DefaultListModel model2 = new DefaultListModel();
 		JList<Usuario> lista2 = new JList<Usuario>(model2);
 		lista2.setBorder(BorderFactory.createLineBorder(Color.gray));
-		lista2.setBounds(85, 190, 120, 100);
+		lista2.setBounds(80, 190, 120, 100);
 		lista2.setFont(new Font("Dialog",1 ,9));
 		model2.addElement("Nome");
 		lista2.setModel(model2);
@@ -115,7 +115,7 @@ class Janela{
 		DefaultListModel model3 = new DefaultListModel();
 		JList<Usuario> lista3 = new JList<Usuario>(model3);
 		lista3.setBorder(BorderFactory.createLineBorder(Color.gray));
-		lista3.setBounds(210, 190, 155, 100);
+		lista3.setBounds(200, 190, 155, 100);
 		lista3.setFont(new Font("Dialog",1 ,9));
 		model3.addElement("Email");
 		lista3.setModel(model3);
@@ -150,8 +150,21 @@ class Janela{
 		});
 		frame.add(bt4);
 		
-		
-		
+		JButton bt5 = new JButton("limpar");
+		bt5.setFont(new Font("Dialog",1 , 8));
+		bt5.setBounds(310, 150, 65, 20);
+		bt5.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				model1.clear();
+				model2.clear();
+				model3.clear();
+				lista1.setModel(model1);
+				lista1.setModel(model2);
+				lista1.setModel(model3);
+			}
+		});
+		frame.add(bt5);
 		
 		frame.setVisible(true);
 		
