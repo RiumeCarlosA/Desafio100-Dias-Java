@@ -1,0 +1,1 @@
+Instalei o xampp e fiz a tabela com id, nome e email.
