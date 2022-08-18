@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Crud {
-	public void InserirDados(String id, String nome, String email) throws SQLException {
-		Connection conexao = FabricaConexao.getConexao();
+	private Connection conexao = FabricaConexao.getConexao();
+	public void inserirDados(String id, String nome, String email) throws SQLException {
 		String sql = "INSERT INTO cadastro "
 				+ "(id, nome, email)"
 				+ " VALUES (?, ?, ?);";
@@ -14,7 +14,13 @@ public class Crud {
 		stmt.setString(1, id);
 		stmt.setString(2, nome);
 		stmt.setString(3, email);
-		System.out.println(sql);
+		stmt.execute();
+	}
+	public void excluirDados(String id, String nome) throws SQLException{
+		String sql = "DELETE FROM cadastro WHERE id  = ? and nome = ?";
+		PreparedStatement stmt = conexao.prepareStatement(sql);
+		stmt.setString(1, id);
+		stmt.setString(2, nome);
 		stmt.execute();
 	}
 }

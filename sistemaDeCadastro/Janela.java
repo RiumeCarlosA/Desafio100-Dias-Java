@@ -2,9 +2,7 @@ package sistemaDeCadastro;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +12,7 @@ import javax.swing.JTextField;
 
 class Janela{
 	public void criarJanela(){
+		Crud crud = new Crud();
 		JFrame frame = new JFrame();
 		
 		frame.setTitle("Desafio 30 Java");
@@ -51,9 +50,8 @@ class Janela{
 		bt1.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent ev) {
-				Crud crud = new Crud();
 				try {
-					crud.InserirDados(tf1.getText(), tf2.getText(), tf3.getText());
+					crud.inserirDados(tf1.getText(), tf2.getText(), tf3.getText());
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
@@ -64,6 +62,16 @@ class Janela{
 		JButton bt2 = new JButton("Excluir");
 		bt2.setFont(new Font("Arial",1 , 10));
 		bt2.setBounds(223, 160, 75, 20);
+		bt2.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				try {
+					crud.excluirDados(tf1.getText(), tf2.getText());
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+			}
+		});
 		frame.add(bt2);
 		
 		frame.setVisible(true);
