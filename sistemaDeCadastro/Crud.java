@@ -2,7 +2,11 @@ package sistemaDeCadastro;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Crud {
 	private Connection conexao = FabricaConexao.getConexao();
@@ -31,4 +35,17 @@ public class Crud {
 		stmt.setString(3, id);
 		stmt.execute();
 	}
-}
+	public List<Usuario> mostrarDados() throws SQLException {
+		String sql = "SELECT * FROM cadastro;";
+		Statement stmt = conexao.createStatement();
+		ResultSet resultado = stmt.executeQuery(sql);
+		List<Usuario> usuario = new ArrayList<>();
+		while(resultado.next()) {
+			String id = resultado.getString("id");
+			String nome = resultado.getString("nome");
+			String email = resultado.getString("email");
+			usuario.add(new Usuario(id, nome, email));
+		}
+		return usuario;
+	}
+	}

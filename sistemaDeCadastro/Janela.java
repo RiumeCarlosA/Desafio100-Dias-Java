@@ -1,22 +1,27 @@
 package sistemaDeCadastro;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 class Janela{
-	public void criarJanela(){
+	public void criarJanela() throws SQLException{
 		Crud crud = new Crud();
 		JFrame frame = new JFrame();
 		
 		frame.setTitle("Desafio 30 Java");
-		frame.setSize(400,250);
+		frame.setSize(450,350);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -45,8 +50,8 @@ class Janela{
 		frame.add(tf3);
 		
 		JButton bt1 = new JButton("Inserir");
-		bt1.setFont(new Font("Arial",1 , 10));
-		bt1.setBounds(30, 160, 75, 20);
+		bt1.setFont(new Font("Dialog",1 , 8));
+		bt1.setBounds(30, 150, 65, 20);
 		bt1.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent ev) {
@@ -60,8 +65,8 @@ class Janela{
 		frame.add(bt1);
 		
 		JButton bt2 = new JButton("Excluir");
-		bt2.setFont(new Font("Arial",1 , 10));
-		bt2.setBounds(135, 160, 75, 20);
+		bt2.setFont(new Font("Dialog",1 , 8));
+		bt2.setBounds(100, 150, 65, 20);
 		bt2.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent ev) {
@@ -75,8 +80,8 @@ class Janela{
 		frame.add(bt2);
 		
 		JButton bt3 = new JButton("Alterar");
-		bt3.setFont(new Font("Arial",1 , 10));
-		bt3.setBounds(240, 160, 75, 20);
+		bt3.setFont(new Font("Dialog",1 , 8));
+		bt3.setBounds(170, 150, 65, 20);
 		bt3.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent ev) {
@@ -88,6 +93,65 @@ class Janela{
 			}
 		});
 		frame.add(bt3);
+	
+		DefaultListModel model1 = new DefaultListModel();
+		JList<Usuario> lista1 = new JList<Usuario>(model1);
+		lista1.setBorder(BorderFactory.createLineBorder(Color.gray));
+		lista1.setBounds(30, 190, 50, 100);
+		lista1.setFont(new Font("Dialog",1 ,9));
+		model1.addElement("ID");
+		lista1.setModel(model1);
+		frame.add(lista1);
+		
+		DefaultListModel model2 = new DefaultListModel();
+		JList<Usuario> lista2 = new JList<Usuario>(model2);
+		lista2.setBorder(BorderFactory.createLineBorder(Color.gray));
+		lista2.setBounds(85, 190, 120, 100);
+		lista2.setFont(new Font("Dialog",1 ,9));
+		model2.addElement("Nome");
+		lista2.setModel(model2);
+		frame.add(lista2);
+		
+		DefaultListModel model3 = new DefaultListModel();
+		JList<Usuario> lista3 = new JList<Usuario>(model3);
+		lista3.setBorder(BorderFactory.createLineBorder(Color.gray));
+		lista3.setBounds(210, 190, 155, 100);
+		lista3.setFont(new Font("Dialog",1 ,9));
+		model3.addElement("Email");
+		lista3.setModel(model3);
+		frame.add(lista3);
+		
+		JButton bt4 = new JButton("Listar");
+		bt4.setFont(new Font("Dialog",1 , 8));
+		bt4.setBounds(240, 150, 65, 20);
+		bt4.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				try {
+					model1.clear();
+					model2.clear();
+					model3.clear();
+					lista1.setModel(model1);
+					lista1.setModel(model2);
+					lista1.setModel(model3);
+					List<Usuario> usuario = crud.mostrarDados();
+					for(Usuario i : usuario) {
+						model1.addElement(i.getId());
+						model2.addElement(i.getNome());
+						model3.addElement(i.getEmail());
+						lista1.setModel(model1);
+						lista2.setModel(model2);
+						lista3.setModel(model3);
+					}
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+			}
+		});
+		frame.add(bt4);
+		
+		
+		
 		
 		frame.setVisible(true);
 		
